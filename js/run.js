@@ -1,6 +1,7 @@
 import dfs from './dfs.js'
 import { getDistance, sleep } from './tools.js'
 import { initCanvas, drawGraph } from './canvas.js'
+import { initDisplay, updateWithStep } from './display.js'
 
 let iterator = null
 let isStopped = false
@@ -26,7 +27,8 @@ function change() {
     break;
   }
 
-  console.log(config, type)
+  const state = step()
+  initDisplay(state.value)
 }
 
 function getConfig() {
@@ -69,13 +71,12 @@ async function run() {
   if(!config || !iterator) return
 
   isStopped = false
-  if (!config) config = getConfig()
-  change()
 
   while (iterator && !isStopped) {
     const nextState = iterator.next()
     if (nextState.done) break
     drawGraph(config, nextState.value)
+    updateWithStep(nextState.value)
     await sleep(30)
   }
 }
@@ -87,7 +88,10 @@ function step() {
 
   if (!nextState.done) {
     drawGraph(config, nextState.value)
+    updateWithStep(nextState.value)
   }
+
+  return nextState
 }
 
 function stop() {
@@ -98,10 +102,6 @@ function toBegin() {
   if (!iterator) return
   stop()
   change()
-
-  const nextState = iterator.next()
-
-  drawGraph(config, nextState.value)
 }
 
 function toEnd() {
@@ -114,6 +114,7 @@ function toEnd() {
     const nextState = iterator.next()
     if (nextState.done) break
     lastState = nextState.value
+    updateWithStep(nextState.value)
   }
 
   drawGraph(config, lastState)

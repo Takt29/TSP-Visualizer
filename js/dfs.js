@@ -4,9 +4,16 @@ const startDFS = function*(config) {
 
   const initState = getInitState(config || {})
 
+  let minimumDistanceState = copyState(initState)
+  let minimumDistance = Infinity
+
   const dfs = function*(curState) {
     if (curState.pos == curState.start && curState.history.length != 0) {
       if (curState.history.length == curState.num) {
+        if (minimumDistance > curState.distance) {
+          minimumDistanceState = copyState(curState)
+          minimumDistance = curState.distance
+        }
         yield curState
       }
       return
@@ -27,6 +34,9 @@ const startDFS = function*(config) {
   }
 
   yield *dfs(initState)
+
+  if (minimumDistance !== Infinity)
+    yield minimumDistanceState
 }
 
 export default startDFS
