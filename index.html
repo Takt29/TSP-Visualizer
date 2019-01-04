@@ -19,41 +19,37 @@
     <div class="container">
       <div class="row">
         <div class="col-8" width="100%" height="100%">
-          キャンバス
           <canvas id="canvas"></canvas>
         </div>
         <div class="col-4">
           <div class="card">
             <div class="card-header">ノード数</div>
             <div class="card-body">
-              <form>
-                <div class="form-group">
-                  <select class="form-control" id="numOfNodes">
-                    <option value="4">N = 4</option>
-                    <option value="8" selected>N = 8</option>
-                    <option value="16">N = 16</option>
-                    <option value="32">N = 32</option>
-                  </select>
-                </div>
-                <button class="btn btn-primary">初期化</button>
-              </form>
+              <div class="form-group">
+                <select class="form-control" id="numOfNodes">
+                  <option value="4">N = 4</option>
+                  <option value="6">N = 6</option>
+                  <option value="8" selected>N = 8</option>
+                  <option value="16">N = 16</option>
+                  <option value="32">N = 32</option>
+                </select>
+              </div>
+              <button class="btn btn-primary" onClick="init()">初期化</button>
             </div>
           </div>
           <div class="card">
             <div class="card-header">探索方法</div>
             <div class="card-body">
-              <form>
-                <div class="form-group">
-                  <select class="form-control" id="numOfNodes">
-                    <option value="dfs" selected>[最適解]深さ優先探索</option>
-                    <option value="bfs">[最適解]幅優先探索</option>
-                    <option value="astar">[最適解]A*探索</option>
-                    <option value="hc">[近似解]山登り法</option>
-                    <option value="sa">[近似解]焼きなまし法</option>
-                  </select>
-                </div>
-                <button class="btn btn-primary">反映</button>
-              </form>
+              <div class="form-group">
+                <select class="form-control" id="type">
+                  <option value="dfs" selected>[最適解]深さ優先探索</option>
+                  <option value="bfs">[最適解]幅優先探索</option>
+                  <option value="astar">[最適解]A*探索</option>
+                  <option value="hc">[近似解]山登り法</option>
+                  <option value="sa">[近似解]焼きなまし法</option>
+                </select>
+              </div>
+              <button class="btn btn-primary" onClick="change()">変更</button>
             </div>
           </div>
           <div class="card">
@@ -75,12 +71,11 @@
               </tbody>
             </table>
             <div class="card-body text-center">
-              <button class="btn btn-primary">|&lt;</button>
-              <button class="btn btn-primary">&lt;&lt;</button>
-              <button class="btn btn-primary">▶</button>
-              <button class="btn btn-primary">■</button>
-              <button class="btn btn-primary">&gt;&gt;</button>
-              <button class="btn btn-primary">&gt;|</button>
+              <button class="btn btn-primary" onClick="toBegin()">|&lt;</button>
+              <button class="btn btn-primary" onClick="run()">▶</button>
+              <button class="btn btn-primary" onClick="stop()">■</button>
+              <button class="btn btn-primary" onClick="step()">&gt;&gt;</button>
+              <button class="btn btn-primary" onClick="toEnd()">&gt;|</button>
             </div>
           </div>
         </div>
@@ -90,5 +85,9 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="js/init.js"></script>
+    <script type="module" src="js/tools.js"></script>
+    <script type="module" src="js/dfs.js"></script>
+    <script type="module" src="js/run.js"></script>
   </body>
 </html>
