@@ -10,12 +10,14 @@ let isStopped = false
 let config = null
 
 function init() {
+  isStopped = true
   initCanvas()
   config = getConfig()
   change()
 }
 
 function change() {
+  isStopped = true
   if (!config) config = getConfig()
 
   const type = $('#type').val()
