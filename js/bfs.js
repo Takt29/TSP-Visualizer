@@ -1,8 +1,6 @@
 import { getInitState, copyState, getDistance } from './tools.js'
 
 const startBFS = function*(config) {
-  console.log('startBFS')
-
   const initState = getInitState(config || {})
 
   let minimumDistanceState = copyState(initState)
@@ -11,8 +9,6 @@ const startBFS = function*(config) {
   let currentQueue = [], nextQueue = []
 
   currentQueue.push(initState)
-
-  console.log(initState)
 
   for (let i = 0; i < config.num; i++) {
     for (const curState of currentQueue) {

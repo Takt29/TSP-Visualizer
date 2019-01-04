@@ -3,6 +3,7 @@ import { initCanvas, drawGraph } from './canvas.js'
 import { initDisplay, updateWithStep } from './display.js'
 import dfs from './dfs.js'
 import bfs from './bfs.js'
+import astar from './astar.js'
 
 let iterator = null
 let isStopped = false
@@ -25,6 +26,9 @@ function change() {
     break;
   case 'bfs':
     iterator = bfs(config)
+    break;
+  case 'astar':
+    iterator = astar(config)
     break;
   default:
     iterator = null
