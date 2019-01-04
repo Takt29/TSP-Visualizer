@@ -1,7 +1,8 @@
-import dfs from './dfs.js'
 import { getDistance, sleep } from './tools.js'
 import { initCanvas, drawGraph } from './canvas.js'
 import { initDisplay, updateWithStep } from './display.js'
+import dfs from './dfs.js'
+import bfs from './bfs.js'
 
 let iterator = null
 let isStopped = false
@@ -22,6 +23,9 @@ function change() {
   case 'dfs':
     iterator = dfs(config)
     break;
+  case 'bfs':
+    iterator = bfs(config)
+    break;
   default:
     iterator = null
     break;
@@ -32,7 +36,7 @@ function change() {
 }
 
 function getConfig() {
-  const num = $('#numOfNodes').val()
+  const num = parseInt($('#numOfNodes').val(), 10)
   const start = 0
   const pos = new Array(num)
   const nodeSize = 30 //直径
