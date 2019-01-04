@@ -22,6 +22,16 @@ const getDistance = (posA, posB) => (
   Math.sqrt((posA.x - posB.x) * (posA.x - posB.x) + (posA.y - posB.y) * (posA.y - posB.y))
 )
 
+const getDistanceFromArray = (posArray, history) => {
+  let sumDistance = 0.0
+
+  for (let i = 0; i + 1 < history.length; i++) {
+    sumDistance += getDistance(posArray[history[i]], posArray[history[i+1]])
+  }
+
+  return sumDistance
+}
+
 const sleep = (time) => (new Promise((resolve, reject) => {
   setTimeout(() => { resolve() }, time)
 }))
@@ -29,6 +39,7 @@ const sleep = (time) => (new Promise((resolve, reject) => {
 export {
   copyState,
   getDistance,
+  getDistanceFromArray,
   getInitState,
   sleep,
 }
