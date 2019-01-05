@@ -33,7 +33,6 @@ const startAStar = function*(config) {
 
   while(pqueue.length) {
     const curState = pqueue.dequeue()
-    console.log(curState)
     if (curState.history.length != 0 && curState.pos == curState.start) {
       if (curState.history.length == curState.num) {
         yield curState

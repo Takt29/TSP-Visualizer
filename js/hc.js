@@ -1,4 +1,4 @@
-import { getInitState, copyState, getDistanceFromArray } from './tools.js'
+import { getInitState, copyState, getDistance, getDistanceFromArray, reverse } from './tools.js'
 
 const startHC = function*(config) {
   const initState = getInitState(config || {})
@@ -16,6 +16,7 @@ const startHC = function*(config) {
   initState.distance = getDistanceFromArray(config.pos, initState.history.concat(initState.pos))
 
   let curState = copyState(initState)
+  const posXY = config.pos
 
   while (1) {
     yield curState
@@ -23,17 +24,24 @@ const startHC = function*(config) {
     let minNextState = null
     let minNextStateDistance = curState.distance
 
-    for (let i = 1; i < curState.num; i++) {
-      for (let j = i+1; j < curState.num; j++) {
+    // 2-opt
+    for (let i = 0; i < curState.num - 2; i++) {
+      for (let j = i + 2; j < curState.num; j++) {
         const nextState = copyState(curState)
 
-        /* swap */
-        const a = curState.history[i]
-        const b = curState.history[j]
-        nextState.history[i] = b
-        nextState.history[j] = a
+        const getDistanceFromIndex = (indexA, indexB) => getDistance(posXY[curState.history[indexA]], posXY[curState.history[indexB]])
 
-        nextState.distance = getDistanceFromArray(config.pos, nextState.history.concat(nextState.pos))
+        const curTargetDist = getDistanceFromIndex(i, i+1) + getDistanceFromIndex(j, (j+1)%curState.num)
+        const newTargetDist = getDistanceFromIndex(i, j) + getDistanceFromIndex(i+1, (j+1)%curState.num)
+
+        if (curTargetDist > newTargetDist) {
+          nextState.distance += newTargetDist - curTargetDist
+          reverse(nextState.history, i+1, j+1)
+          console.log(curTargetDist, newTargetDist)
+          console.log(nextState.distance, getDistanceFromArray(config.pos, nextState.history))
+        }
+
+        console.log(nextState.distance)
 
         if (minNextStateDistance > nextState.distance) {
           minNextState = nextState
