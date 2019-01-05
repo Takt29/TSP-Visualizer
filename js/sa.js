@@ -25,7 +25,7 @@ const startSA = function*(config) {
 
   yield curState
 
-  for (let i = 0; Temperture(i, curState.num) > 1e-9; i++) {
+  for (let i = 0; Temperture(i, curState.num) > 1e-7; i++) {
 
     let minNextState = null
     let minNextStateDistance = curState.distance
