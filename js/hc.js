@@ -37,11 +37,7 @@ const startHC = function*(config) {
         if (curTargetDist > newTargetDist) {
           nextState.distance += newTargetDist - curTargetDist
           reverse(nextState.history, i+1, j+1)
-          console.log(curTargetDist, newTargetDist)
-          console.log(nextState.distance, getDistanceFromArray(config.pos, nextState.history))
         }
-
-        console.log(nextState.distance)
 
         if (minNextStateDistance > nextState.distance) {
           minNextState = nextState
