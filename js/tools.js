@@ -39,15 +39,11 @@ const sleep = (time) => (new Promise((resolve, reject) => {
 const reverse = (arr, begin, end) => {
   const n = end - begin
 
-  console.log(n, begin, end)
-
   for (let i = 0; i < n / 2; i++) {
     const tmp = arr[begin + i]
     arr[begin + i] = arr[end - i - 1]
     arr[end - i - 1] = tmp
   }
-
-  console.log(arr)
 }
 
 export {

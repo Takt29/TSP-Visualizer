@@ -5,6 +5,7 @@ import dfs from './dfs.js'
 import bfs from './bfs.js'
 import astar from './astar.js'
 import hc from './hc.js'
+import sa from './sa.js'
 
 let iterator = null
 let isStopped = false
@@ -35,6 +36,9 @@ function change() {
     break;
   case 'hc':
     iterator = hc(config)
+    break;
+  case 'sa':
+    iterator = sa(config)
     break;
   default:
     iterator = null
@@ -91,7 +95,7 @@ async function run() {
     if (nextState.done) break
     drawGraph(config, nextState.value)
     updateWithStep(nextState.value)
-    await sleep(30)
+    if(nextState.value) await sleep(30)
   }
 }
 
