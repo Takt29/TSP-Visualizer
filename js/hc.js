@@ -39,6 +39,8 @@ const startHC = function*(config) {
           reverse(nextState.history, i+1, j+1)
         }
 
+        if (minNextState) yield null
+
         if (minNextStateDistance > nextState.distance) {
           minNextState = nextState
           minNextStateDistance = nextState.distance
