@@ -20,9 +20,11 @@ const startHC = function*(config) {
 
   while (1) {
     yield curState
+    console.log('aa')
 
     let minNextState = null
     let minNextStateDistance = curState.distance
+    let firstState = true
 
     // 2-opt
     for (let i = 0; i < curState.num - 2; i++) {
@@ -39,7 +41,10 @@ const startHC = function*(config) {
           reverse(nextState.history, i+1, j+1)
         }
 
-        if (minNextState) yield null
+        if (firstState) {
+          yield null
+          firstState = true
+        }
 
         if (minNextStateDistance > nextState.distance) {
           minNextState = nextState
