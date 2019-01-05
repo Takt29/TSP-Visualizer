@@ -134,7 +134,7 @@ function toEnd() {
   while (1) {
     const nextState = iterator.next()
     if (nextState.done) break
-    lastState = nextState.value
+    if (nextState.value) lastState = nextState.value
     updateWithStep(nextState.value)
   }
 
