@@ -20,7 +20,6 @@ const startHC = function*(config) {
 
   while (1) {
     yield curState
-    console.log('aa')
 
     let minNextState = null
     let minNextStateDistance = curState.distance
