@@ -55,8 +55,8 @@ function getConfig() {
   const pos = new Array(num)
   const nodeSize = 30 //直径
 
-  const height = $('#canvas').parent().height()
-  const width = $('#canvas').parent().width()
+  const height = $('#canvas').attr('height')
+  const width = $('#canvas').attr('width')
 
   // generate Pos
   for (let i = 0; i < num; i++) {

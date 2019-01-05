@@ -2,7 +2,8 @@ const initCanvas = () => {
   const canvas = $('#canvas')
   const canvas_parent = $('#canvas').parent()
   canvas.attr('width', canvas_parent.width().toString());
-  canvas.attr('height', canvas_parent.height().toString());
+  canvas.attr('height', ($(window).height() - 70).toString());
+  canvas_parent.attr('height', ($(window).height() - 70).toString());
 }
 
 const drawEdge = (ctx, posA, posB) => {
