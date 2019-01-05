@@ -15,10 +15,10 @@ function init() {
   isStopped = true
   initCanvas()
   config = getConfig()
-  change()
+  change(true)
 }
 
-function change() {
+function change(replace = false) {
   isStopped = true
   if (!config) config = getConfig()
 
@@ -31,8 +31,11 @@ function change() {
   case 'bfs':
     iterator = bfs(config)
     break;
-  case 'astar':
-    iterator = astar(config)
+  case 'astar1':
+    iterator = astar(config, 1)
+    break;
+  case 'astar2':
+    iterator = astar(config, 2)
     break;
   case 'hc':
     iterator = hc(config)
@@ -46,7 +49,7 @@ function change() {
   }
 
   const state = step()
-  initDisplay(state.value)
+  initDisplay(state.value, replace)
 }
 
 function getConfig() {

@@ -3,6 +3,7 @@ import effectiveBranchingFactor from './effectiveBranchingFactor.js'
 let step = 0
 let maxScore = -Infinity
 let minDistance = Infinity
+let bestMinDistance = Infinity
 let maxDepth = 0
 
 const update = (state) => {
@@ -17,19 +18,25 @@ const update = (state) => {
 
   if (num == history.length && distance) {
     minDistance = Math.min(minDistance, distance)
+    bestMinDistance = Math.min(bestMinDistance, distance)
   }
 
   $('#distance').text(distance.toFixed(2))
   $('#mindistance').text(minDistance.toFixed(2))
   $('#score').text(score.toFixed(2))
   $('#maxscore').text(maxScore.toFixed(2))
+  $('#bestmindistance').text(bestMinDistance.toFixed(2))
 }
 
-const initDisplay = (state) => {
+const initDisplay = (state, replace = false) => {
   step = 0
   minDistance = Infinity
   maxScore = -Infinity
   maxDepth = 0
+
+  if (replace)
+    bestMinDistance = Infinity
+
   update(state)
 }
 

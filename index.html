@@ -52,7 +52,8 @@
                 <select class="form-control" id="type">
                   <option value="dfs" selected>[最適解]深さ優先探索</option>
                   <option value="bfs">[最適解]幅優先探索</option>
-                  <option value="astar">[最適解]A*探索</option>
+                  <option value="astar1">[最適解]A*探索①</option>
+                  <option value="astar2">[最適解]A*探索②</option>
                   <option value="hc">[近似解]山登り法</option>
                   <option value="sa">[近似解]焼きなまし法</option>
                 </select>
@@ -98,6 +99,12 @@
                   <th scope="row">有効分岐数</th>
                   <td class="text-right">
                     <span id="ebfactor">--</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">最良最短距離</th>
+                  <td class="text-right">
+                    <span id="bestmindistance">--</span>
                   </td>
                 </tr>
               </tbody>
