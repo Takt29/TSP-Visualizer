@@ -34,8 +34,6 @@ const startSA = function*(config) {
     const a = Math.floor( Math.random() * (curState.num - 2) )
     const b = Math.floor( Math.random() * (curState.num - (a + 2))) + (a + 2)
 
-    const nextState = copyState(curState)
-
     const getDistanceFromIndex = (indexA, indexB) => getDistance(posXY[curState.history[indexA]], posXY[curState.history[indexB]])
 
     const curTargetDist = getDistanceFromIndex(a, a+1) + getDistanceFromIndex(b, (b+1)%curState.num)
@@ -43,11 +41,9 @@ const startSA = function*(config) {
 
     const deltaDistance = newTargetDist - curTargetDist
 
-    nextState.distance += deltaDistance
-    reverse(nextState.history, a+1, b+1)
-
-    if (curState.distance > nextState.distance || Math.exp(-deltaDistance / Temperture(i, curState.num)) > Math.random()) {
-      curState = nextState
+    if (deltaDistance < 0 || Math.exp(-deltaDistance / Temperture(i, curState.num)) > Math.random()) {
+      reverse(curState.history, a+1, b+1)
+      curState.distance += deltaDistance
       yield curState
     } else {
       yield null

@@ -21,39 +21,39 @@ const startHC = function*(config) {
   while (1) {
     yield curState
 
-    let minNextState = null
-    let minNextStateDistance = curState.distance
+    let minNextStateDeltaDistance = 0
+    let minNextStateIndexA = -1
+    let minNextStateIndexB = -1
     let firstState = true
 
     // 2-opt
     for (let i = 0; i < curState.num - 2; i++) {
       for (let j = i + 2; j < curState.num; j++) {
-        const nextState = copyState(curState)
-
         const getDistanceFromIndex = (indexA, indexB) => getDistance(posXY[curState.history[indexA]], posXY[curState.history[indexB]])
 
         const curTargetDist = getDistanceFromIndex(i, i+1) + getDistanceFromIndex(j, (j+1)%curState.num)
         const newTargetDist = getDistanceFromIndex(i, j) + getDistanceFromIndex(i+1, (j+1)%curState.num)
 
-        if (curTargetDist > newTargetDist) {
-          nextState.distance += newTargetDist - curTargetDist
-          reverse(nextState.history, i+1, j+1)
+        if (minNextStateDeltaDistance > newTargetDist - curTargetDist) {
+          minNextStateDeltaDistance = newTargetDist - curTargetDist
+          minNextStateIndexA = i
+          minNextStateIndexB = j
         }
 
         if (firstState) {
           yield null
           firstState = true
         }
-
-        if (minNextStateDistance > nextState.distance) {
-          minNextState = nextState
-          minNextStateDistance = nextState.distance
-        }
       }
     }
 
-    if (!minNextState) break
-    curState = minNextState
+    if (minNextStateDeltaDistance < 0) {
+      curState.distance += minNextStateDeltaDistance
+      reverse(curState.history, minNextStateIndexA+1, minNextStateIndexB+1)
+    } else {
+      yield null
+      break
+    }
   }
 }
 
