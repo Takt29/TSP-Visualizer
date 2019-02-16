@@ -28,6 +28,11 @@ const update = (state) => {
   $('#bestmindistance').text(bestMinDistance.toFixed(2))
 }
 
+const changeHeader = (algoName, num) => {
+  $('#header-algo').text(algoName)
+  $('#header-num').text('N = ' + num)
+}
+
 const initDisplay = (state, replace = false) => {
   step = 0
   minDistance = Infinity
@@ -48,4 +53,5 @@ const updateWithStep = (state) => {
 export {
   initDisplay,
   updateWithStep,
+  changeHeader,
 }

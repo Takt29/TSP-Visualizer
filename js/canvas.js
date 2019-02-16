@@ -2,7 +2,7 @@ const initCanvas = () => {
   const canvas = $('#canvas')
   const canvas_parent = $('#canvas').parent()
   canvas.attr('width', canvas_parent.width().toString());
-  canvas.attr('height', ($(window).height() - 70).toString());
+  canvas.attr('height', ($(window).height() - 70 - $('#header').height()).toString());
   canvas_parent.attr('height', ($(window).height() - 70).toString());
 }
 

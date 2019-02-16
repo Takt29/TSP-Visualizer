@@ -1,6 +1,6 @@
 import { getDistance, sleep } from './tools.js'
 import { initCanvas, drawGraph } from './canvas.js'
-import { initDisplay, updateWithStep } from './display.js'
+import { initDisplay, updateWithStep, changeHeader } from './display.js'
 import dfs from './dfs.js'
 import bfs from './bfs.js'
 import astar from './astar.js'
@@ -23,25 +23,32 @@ function change(replace = false) {
   if (!config) config = getConfig()
 
   const type = $('#type').val()
+  let algoName = ''
 
   switch(type) {
   case 'dfs':
     iterator = dfs(config)
+    algoName = '[最適解]深さ優先探索'
     break;
   case 'bfs':
     iterator = bfs(config)
+    algoName = '[最適解]幅優先探索'
     break;
   case 'astar1':
     iterator = astar(config, 1)
+    algoName = '[最適解]A*探索①'
     break;
   case 'astar2':
     iterator = astar(config, 2)
+    algoName = '[最適解]A*探索②'
     break;
   case 'hc':
     iterator = hc(config)
+    algoName = '[近似解]山登り法'
     break;
   case 'sa':
     iterator = sa(config)
+    algoName = '[近似解]焼きなまし法'
     break;
   default:
     iterator = null
@@ -50,6 +57,7 @@ function change(replace = false) {
 
   const state = step()
   initDisplay(state.value, replace)
+  changeHeader(algoName, config.num)
 }
 
 function getConfig() {
@@ -102,6 +110,12 @@ async function run() {
   }
 }
 
+function backstep() {
+  if (!iterator) return
+
+
+}
+
 function step() {
   if (!iterator) return
 
@@ -152,6 +166,7 @@ window.init = init
 window.change = change
 window.run = run
 window.step = step
+window.backstep = backstep
 window.stop = stop
 window.toBegin = toBegin
 window.toEnd = toEnd
