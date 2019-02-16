@@ -105,7 +105,12 @@ async function run() {
 function step() {
   if (!iterator) return
 
-  const nextState = iterator.next()
+  let nextState = iterator.next()
+
+  while(!nextState.done && !nextState.value) {
+    nextState = iterator.next()
+    updateWithStep(nextState.value)
+  }
 
   if (!nextState.done) {
     drawGraph(config, nextState.value)
