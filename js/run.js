@@ -1,6 +1,7 @@
 import { getDistance, sleep } from './tools.js'
 import { initCanvas, drawGraph } from './canvas.js'
-import { initDisplay, updateWithStep, changeHeader } from './display.js'
+import { initDisplay, updateWithStep, changeHeader, update } from './display.js'
+import { initHistory, getHistorySize, getHistory, pushHistory } from './history.js'
 import dfs from './dfs.js'
 import bfs from './bfs.js'
 import astar from './astar.js'
@@ -10,6 +11,7 @@ import sa from './sa.js'
 let iterator = null
 let isStopped = false
 let config = null
+let historyIndex = null
 
 function init() {
   isStopped = true
@@ -53,12 +55,16 @@ function change(replace = false) {
     break;
   default:
     iterator = null
+    algoName = ''
     break;
   }
 
+  initHistory()
+  historyIndex = null
   const state = step()
   initDisplay(state.value, replace)
   changeHeader(algoName, config.num)
+  pushHistory(state.value, 0)
 }
 
 function getConfig() {
@@ -97,12 +103,34 @@ function getConfig() {
   return { num, start, pos, nodeSize }
 }
 
+const showHistory = (historyIndex) => {
+  const historyItem = getHistory(historyIndex)
+
+  console.log(historyItem)
+
+  if (historyItem && config) {
+    update(historyItem.state, historyItem.step)
+    drawGraph(config, historyItem.state)
+  }
+}
+
 async function run() {
   if(!config || !iterator) return
 
   isStopped = false
 
   while (iterator && !isStopped) {
+    if (historyIndex === 1) {
+      historyIndex = null
+    }
+
+    if (historyIndex !== null) {
+      historyIndex -= 1
+      showHistory(historyIndex)
+      await sleep(30)
+      continue
+    }
+
     const nextState = iterator.next()
     if (nextState.done) break
     drawGraph(config, nextState.value)
@@ -114,11 +142,27 @@ async function run() {
 function backstep() {
   if (!iterator) return
 
+  if (historyIndex === null) {
+    historyIndex = 1
+  } else if (historyIndex + 1 < getHistorySize()) {
+    historyIndex += 1
+  }
 
+  showHistory(historyIndex)
 }
 
 function step() {
   if (!iterator) return
+
+  if (historyIndex !== null) {
+    if (historyIndex === 1) {
+      historyIndex = null
+    } else {
+      historyIndex -= 1
+      showHistory(historyIndex)
+      return
+    }
+  }
 
   let nextState = iterator.next()
 

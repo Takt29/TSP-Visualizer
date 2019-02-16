@@ -1,3 +1,4 @@
+import { pushHistory } from './history.js'
 import effectiveBranchingFactor from './effectiveBranchingFactor.js'
 
 let step = 0
@@ -6,8 +7,12 @@ let minDistance = Infinity
 let bestMinDistance = Infinity
 let maxDepth = 0
 
-const update = (state) => {
-  $('#steps').text(step.toString())
+const update = (state, displayStep = null) => {
+  if (displayStep === null)
+    $('#steps').text(step.toString())
+  else
+    $('#steps').text(displayStep.toString())
+
   $('#ebfactor').text(effectiveBranchingFactor(maxDepth, step).toFixed(2))
   if (state == null) return
 
@@ -48,10 +53,12 @@ const initDisplay = (state, replace = false) => {
 const updateWithStep = (state) => {
   step = (step || 0) + 1
   update(state)
+  pushHistory(state, step)
 }
 
 export {
   initDisplay,
   updateWithStep,
   changeHeader,
+  update
 }
