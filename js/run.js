@@ -16,6 +16,7 @@ function init() {
   initCanvas()
   config = getConfig()
   change(true)
+  $('.btn').removeAttr('disabled');
 }
 
 function change(replace = false) {

@@ -62,18 +62,18 @@
                   <option value="sa">[近似解]焼きなまし法</option>
                 </select>
               </div>
-              <button class="btn btn-primary" onClick="change()">変更</button>
+              <button class="btn btn-primary" onClick="change()" disabled>変更</button>
             </div>
           </div>
           <div class="card">
             <div class="card-header">操作盤</div>
             <div class="card-body text-center">
-              <button class="btn btn-primary" onClick="toBegin()">|&lt;</button>
-              <button class="btn btn-primary" onClick="backstep()">&lt;&lt;</button>
-              <button class="btn btn-primary" onClick="run()">▶</button>
-              <button class="btn btn-primary" onClick="stop()">||</button>
-              <button class="btn btn-primary" onClick="step()">&gt;&gt;</button>
-              <button class="btn btn-primary" onClick="toEnd()">&gt;|</button>
+              <button class="btn btn-primary" onClick="toBegin()" disabled> |&lt; </button>
+              <button class="btn btn-primary" onClick="backstep()" disabled> &lt;&lt; </button>
+              <button class="btn btn-primary" onClick="run()" disabled> ▶ </button>
+              <button class="btn btn-primary" onClick="stop()" disabled> || </button>
+              <button class="btn btn-primary" onClick="step()" disabled> &gt;&gt; </button>
+              <button class="btn btn-primary" onClick="toEnd()" disabled> &gt;| </button>
             </div>
 
             <table class="table mb-0">
