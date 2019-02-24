@@ -16,4 +16,4 @@ const effectiveBranchingFactor = (depth, N) => {
   return (R + L) / 2
 }
 
-export default effectiveBranchingFactor
+Object.assign(this, {effectiveBranchingFactor})

@@ -1,7 +1,7 @@
-import { pushHistory } from './history.js'
-import effectiveBranchingFactor from './effectiveBranchingFactor.js'
+//import { pushHistory } from './history.js'
+//import effectiveBranchingFactor from './effectiveBranchingFactor.js'
 
-let step = 0
+let _step = 0
 let maxScore = -Infinity
 let minDistance = Infinity
 let bestMinDistance = Infinity
@@ -9,11 +9,11 @@ let maxDepth = 0
 
 const update = (state, displayStep = null) => {
   if (displayStep === null)
-    $('#steps').text(step.toString())
+    $('#steps').text(_step.toString())
   else
     $('#steps').text(displayStep.toString())
 
-  $('#ebfactor').text(effectiveBranchingFactor(maxDepth, step).toFixed(2))
+  $('#ebfactor').text(effectiveBranchingFactor(maxDepth, _step).toFixed(2))
   if (state == null) return
 
   const { distance = 0, score = -Infinity, num = 0, history = [] } = state
@@ -39,7 +39,7 @@ const changeHeader = (algoName, num) => {
 }
 
 const initDisplay = (state, replace = false) => {
-  step = 0
+  _step = 0
   minDistance = Infinity
   maxScore = -Infinity
   maxDepth = 0
@@ -51,14 +51,14 @@ const initDisplay = (state, replace = false) => {
 }
 
 const updateWithStep = (state) => {
-  step = (step || 0) + 1
+  _step = (_step || 0) + 1
   update(state)
-  pushHistory(state, step)
+  pushHistory(state, _step)
 }
 
-export {
+Object.assign(this, {
   initDisplay,
   updateWithStep,
   changeHeader,
   update
-}
+})

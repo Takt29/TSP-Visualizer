@@ -1,4 +1,4 @@
-import { getInitState, copyState, getDistance, getDistanceFromArray, reverse } from './tools.js'
+//import { getInitState, copyState, getDistance, getDistanceFromArray, reverse } from './tools.js'
 
 const Temperture = (t, n) => {
   const alpha = 0.9
@@ -51,7 +51,7 @@ const startSA = function*(config) {
   }
 }
 
-export default startSA
+Object.assign(this, {hc: startSA})
 
 /*
 state = {

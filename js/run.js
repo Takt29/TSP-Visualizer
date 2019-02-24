@@ -1,3 +1,4 @@
+/*
 import { getDistance, sleep } from './tools.js'
 import { initCanvas, drawGraph } from './canvas.js'
 import { initDisplay, updateWithStep, changeHeader, update } from './display.js'
@@ -7,6 +8,7 @@ import bfs from './bfs.js'
 import astar from './astar.js'
 import hc from './hc.js'
 import sa from './sa.js'
+*/
 
 let iterator = null
 let isStopped = false

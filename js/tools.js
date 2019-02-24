@@ -46,11 +46,11 @@ const reverse = (arr, begin, end) => {
   }
 }
 
-export {
+Object.assign(this, {
   copyState,
   getDistance,
   getDistanceFromArray,
   getInitState,
   reverse,
   sleep,
-}
+})

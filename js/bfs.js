@@ -1,4 +1,4 @@
-import { getInitState, copyState, getDistance } from './tools.js'
+//import { getInitState, copyState, getDistance } from './tools.js'
 
 const startBFS = function*(config) {
   const initState = getInitState(config || {})
@@ -46,7 +46,7 @@ const startBFS = function*(config) {
     yield minimumDistanceState
 }
 
-export default startBFS
+Object.assign(this, {bfs: startBFS})
 
 /*
 state = {

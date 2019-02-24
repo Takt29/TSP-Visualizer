@@ -52,7 +52,7 @@ const drawGraph = (config, state) => {
 
 window.initCanvas = initCanvas
 
-export {
+Object.assign(this, {
   drawGraph,
   initCanvas
-}
+})

@@ -1,4 +1,4 @@
-import { getInitState, copyState, getDistance } from './tools.js'
+//import { getInitState, copyState, getDistance } from './tools.js'
 
 const calcScore = (config, state, scoreType = 1) => {
   if (scoreType == 1) return calcScore1(config, state)
@@ -90,7 +90,7 @@ const startAStar = function*(config, scoreType = 1) {
   }
 }
 
-export default startAStar
+Object.assign(this, {astar: startAStar})
 
 /*
 state = {

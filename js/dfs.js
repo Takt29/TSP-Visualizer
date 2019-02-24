@@ -1,4 +1,4 @@
-import { getInitState, copyState, getDistance } from './tools.js'
+//import { getInitState, copyState, getDistance } from './tools.js'
 
 const startDFS = function*(config) {
 
@@ -39,7 +39,7 @@ const startDFS = function*(config) {
     yield minimumDistanceState
 }
 
-export default startDFS
+Object.assign(this, {dfs: startDFS})
 
 /*
 state = {

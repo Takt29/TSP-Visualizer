@@ -1,4 +1,4 @@
-import { copyState } from './tools.js'
+//import { copyState } from './tools.js'
 
 const HistorySizeLimit = 100
 
@@ -35,9 +35,9 @@ const getHistorySize = () => {
   return history.length
 }
 
-export {
+Object.assign(this, {
   initHistory,
   pushHistory,
   getHistory,
   getHistorySize,
-}
+})

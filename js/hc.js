@@ -1,4 +1,4 @@
-import { getInitState, copyState, getDistance, getDistanceFromArray, reverse } from './tools.js'
+//import { getInitState, copyState, getDistance, getDistanceFromArray, reverse } from './tools.js'
 
 const startHC = function*(config) {
   const initState = getInitState(config || {})
@@ -57,7 +57,7 @@ const startHC = function*(config) {
   }
 }
 
-export default startHC
+Object.assign(this, {hc: startHC})
 
 /*
 state = {
