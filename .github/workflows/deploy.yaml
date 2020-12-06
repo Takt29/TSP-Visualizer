@@ -1,0 +1,36 @@
+name: Deploy to Star Server
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+    - name: Install modules
+      run: npm install
+    - name: Install git-ftp
+      run: sudo apt update && sudo apt install -y git-ftp
+    - name: Build
+      run: npm run build
+    - name: Deploy
+      run: .github/scripts/deploy.sh
+      env:
+        FTP_URL: ${{ secrets.FTP_URL }}
+        FTP_USER: ${{ secrets.FTP_USER }}
+        FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+    - name: Notify slack
+      uses: 8398a7/action-slack@v2
+      with:
+        status: ${{ job.status }}
+        fields: repo,message,action,author
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      if: always()
