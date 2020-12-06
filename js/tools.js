@@ -8,7 +8,7 @@ const getInitState = (config) => ({
   distance: 0.0,
 })
 
-const copyState = (state) => ({
+const copyState = (state) => state && ({
   num: state.num,
   start: state.start,
   pos: state.pos,
@@ -26,7 +26,7 @@ const getDistanceFromArray = (posArray, history) => {
   let sumDistance = 0.0
 
   for (let i = 0; i + 1 < history.length; i++) {
-    sumDistance += getDistance(posArray[history[i]], posArray[history[i+1]])
+    sumDistance += getDistance(posArray[history[i]], posArray[history[i + 1]])
   }
 
   return sumDistance
